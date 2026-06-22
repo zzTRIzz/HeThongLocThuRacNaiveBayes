@@ -31,8 +31,7 @@ for index, row in df.iterrows():
     true_label = row['label']
     text = str(row['text'])
 
-    # Bỏ qua bước kiểm tra Blacklist MySQL để tránh mở/đóng Database 5000 lần gây treo máy
-    # Chỉ kiểm tra bẫy từ vô nghĩa và Toán học Naive Bayes
+    # kiểm tra bẫy từ vô nghĩa và Toán học Naive Bayes
     if kiem_tra_tu_vo_nghia(text):
         pred_label = 'spam'
     else:
@@ -45,7 +44,7 @@ for index, row in df.iterrows():
                 prob = (word_counts[label].get(w, 0) + 1) / (total_words + vocab_size)
                 log_prob[label] += math.log(prob)
 
-        # Chốt kết quả
+        # kết quả
         pred_label = 'spam' if log_prob['spam'] > log_prob['ham'] else 'ham'
 
     # Đối chiếu
